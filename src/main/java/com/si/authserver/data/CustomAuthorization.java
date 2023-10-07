@@ -2,17 +2,21 @@ package com.si.authserver.data;
 
 import java.time.Instant;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "`authorization`")
+@Getter
+@Setter
+@NoArgsConstructor
 public class CustomAuthorization {
 
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
     @Column(name = "registered_client_id")
