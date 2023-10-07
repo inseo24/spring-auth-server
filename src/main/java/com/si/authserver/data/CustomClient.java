@@ -1,16 +1,21 @@
 package com.si.authserver.data;
 
-import java.time.Instant;
+import jakarta.persistence.*;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import java.time.Instant;
 
 @Entity
 @Table(name = "`client`")
+@Getter
+@NoArgsConstructor
+@EqualsAndHashCode
 public class CustomClient {
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
     @Column(name = "client_id")
@@ -48,4 +53,20 @@ public class CustomClient {
 
     @Column(name = "token_settings", length = 2000)
     private String tokenSettings;
+
+    @Builder
+    public CustomClient(String clientId, Instant clientIdIssuedAt, String clientSecret, Instant clientSecretExpiresAt, String clientName, String clientAuthenticationMethods, String authorizationGrantTypes, String redirectUris, String postLogoutRedirectUris, String scopes, String clientSettings, String tokenSettings) {
+        this.clientId = clientId;
+        this.clientIdIssuedAt = clientIdIssuedAt;
+        this.clientSecret = clientSecret;
+        this.clientSecretExpiresAt = clientSecretExpiresAt;
+        this.clientName = clientName;
+        this.clientAuthenticationMethods = clientAuthenticationMethods;
+        this.authorizationGrantTypes = authorizationGrantTypes;
+        this.redirectUris = redirectUris;
+        this.postLogoutRedirectUris = postLogoutRedirectUris;
+        this.scopes = scopes;
+        this.clientSettings = clientSettings;
+        this.tokenSettings = tokenSettings;
+    }
 }
